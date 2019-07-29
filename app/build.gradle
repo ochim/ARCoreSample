@@ -8,7 +8,7 @@ android {
     }
     compileSdkVersion 28
     defaultConfig {
-        applicationId "jp.ne.goo.app.arsample1"
+        applicationId "com.android.sample.arsample1"
         minSdkVersion 24
         targetSdkVersion 28
         versionCode 1

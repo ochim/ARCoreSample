@@ -1,4 +1,4 @@
-package jp.ne.goo.app.arsample1;
+package com.android.sample.arsample1;
 
 import android.Manifest;
 
