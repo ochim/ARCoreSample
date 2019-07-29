@@ -1,4 +1,4 @@
-package com.android.sample.arsample1;
+package com.android.sample.arcoresample;
 
 import android.content.Context;
 
@@ -22,6 +22,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("com.android.sample.arsample1", appContext.getPackageName());
+        assertEquals("com.android.sample.arcoresample", appContext.getPackageName());
     }
 }

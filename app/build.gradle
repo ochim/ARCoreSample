@@ -8,7 +8,7 @@ android {
     }
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.android.sample.arsample1"
+        applicationId "com.android.sample.arcoresample"
         minSdkVersion 24
         targetSdkVersion 28
         versionCode 1

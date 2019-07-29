@@ -1,4 +1,4 @@
-package com.android.sample.arsample1;
+package com.android.sample.arcoresample;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
