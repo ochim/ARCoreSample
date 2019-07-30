@@ -1,5 +1,7 @@
 package com.android.sample.arcoresample;
 
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -30,6 +32,7 @@ import androidx.core.content.FileProvider;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.provider.MediaStore;
 import android.view.PixelCopy;
 import android.view.View;
 import android.view.Menu;
@@ -238,6 +241,8 @@ public class MainActivity extends AppCompatActivity {
             if (copyResult == PixelCopy.SUCCESS) {
                 try {
                     saveBitmapToDisk(bitmap, filename);
+
+                    registerDatabase(new File(filename));
                 } catch (IOException e) {
                     Toast toast = Toast.makeText(MainActivity.this, e.toString(),
                             Toast.LENGTH_LONG);
@@ -256,9 +261,9 @@ public class MainActivity extends AppCompatActivity {
                     intent.setDataAndType(photoURI, "image/*");
                     intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                     startActivity(intent);
-
                 });
                 snackbar.show();
+
             } else {
                 Toast toast = Toast.makeText(MainActivity.this,
                         "Failed to copyPixels: " + copyResult, Toast.LENGTH_LONG);
@@ -284,11 +289,22 @@ public class MainActivity extends AppCompatActivity {
             throw new IOException("Failed to save bitmap to disk", ex);
         }
     }
+
     private String generateFilename() {
         String date =
                 new SimpleDateFormat("yyyyMMddHHmmss", java.util.Locale.getDefault()).format(new Date());
         return Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_PICTURES) + File.separator + "Sceneform/" + date + "_screenshot.jpg";
+    }
+
+    // Register to Android's database for quick confirmation in the gallery
+    private void registerDatabase(File file) {
+        ContentValues contentValues = new ContentValues();
+        ContentResolver contentResolver = MainActivity.this.getContentResolver();
+        contentValues.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
+        contentValues.put("_data", file.getAbsolutePath());
+        contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                contentValues);
     }
 
 
